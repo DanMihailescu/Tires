@@ -1,38 +1,164 @@
+<script type="text/javascript">
+    var cars = ["AlfaRomeo","AstonMartin","Audi","Be    ntley","Benz","BMW","Bugatti","Cadillac","Chevrolet","Chrysler","Citroen","Corvette","DAF","Dacia","Daewoo","Daihatsu","Datsun","DeLorean","Dino","Dodge","Farboud","Ferrari","Fiat","Ford","Honda","Hummer","Hyundai","Jaguar","Jeep","KIA","Koenigsegg","Lada","Lamborghini","Lancia","LandRover","Lexus","Ligier","Lincoln","Lotus","Martini","Maserati","Maybach","Mazda","McLaren","Mercedes","MercedesBenz","Mini","Mitsubishi","Nissan","Noble","Opel","Peugeot","Pontiac","Porsche","Renault","RollsRoyce","Rover","Saab","Seat","Skoda","Smart","Spyker","Subaru","Suzuki","Toyota","Vauxhall","Volkswagen","Volvo"];
+
+    var chosenBrand;
+    var chosenYear;
+    var chosenModel;
+
+    //Ajax calls to get data
+    var ajax = new XMLHttpRequest();
+    var method = "GET";
+    var url = "data.php";
+    var asynchronous = true; 
+
+    ajax.open(method, url, asynchronous);
+    ajax.sent();
+
+    //Recieves data from data.php
+    ajax.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+            alert(this.responseText)
+        }
+    }
+    /*
+        POPULATES THE SELECTION MENU
+
+        Input:  args: The list of object that will be in the drop down
+                type: Which drop down is being populated
+    */
+    function populate(args, type){
+        var sel = document.getElementById(type);
+        
+        // create text node to add to option element (opt)
+        for (var i = 0; i < args.length; i++) {
+            // create new option element
+            var opt = document.createElement('option');
+            opt.appendChild( document.createTextNode(cars[i]) );
+            // set value property of opt
+            opt.value = 'option value'; 
+            // add opt to end of select box (sel)
+            sel.appendChild(opt);
+        }
+    }
+
+    /*
+        POPULATES THE BRAND SELECTION MENU
+    */
+    function populateBrands() {
+        populate(cars,'selBrand');
+    }
+
+    /*
+        POPULATES THE MODEL SELECTION MENU
+
+        Input:  brand: The currently choosen brand in the drop down
+    */
+    function populateModels(brand) {
+
+        populate(cars,'selModel');
+    }
+
+    //document.querySelector('span').innerHTML = document.querySelector('span').innerHTML + str + '<br />';
+
+    /*
+        REMOVES ALL MODELS IN THE MODEL SELECTION MENU
+    */
+    function removeAllModels(type) {
+        var sel = document.getElementById(type);
+     }
+
+    /*
+        POPULATES THE MODEL SELECTION MENU
+
+        Input:  brand: The currently choosen brand in the drop down
+                model: The currently choosen model in the drop down
+    */
+    function populateYears(brand, model) { 
+
+    }
+
+    /*
+        REMOVES ALL YEARS IN THE YEAR SELECTION MENU
+    */
+    function removeAllYears() { 
+        document.myform.master.options.length=0
+    }
+
+</script>
 <head>
     <link href="HomeController.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
     <meta charset="utf-8">
 	<title>TireHaven</title>
 	<h1>HOME PAGE</h1>
 </head>
 
 <body>
-	<header>
+    <header>
 		<img src='image.JPG' class='background-img'/>
 		<div class="overlay">
 			<h1>TireHaven: The One Stop Tire Shop</h1>
 
-			
+        <!--Button Basic Layout-->
+        <button id="myButton" class="float-left submit-button" >Home</button>
+
+        <!-- CHANGE TO CORRECT LINK -->
+        <script type="text/javascript">
+            document.getElementById("myButton").onclick = function () {
+                location.href = "https://localhost:8000/lucky/number";
+            };
+        </script>   
+            
+        <a href="/lucky/number" target="_self">Profile</a>
+
+        <form method="POST" name="brand">
+            <select class="brand" id="selBrand" name="brand" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
+                <option value="#">Select Brand</option>
+            </select>
+
+            <script>
+                populateBrands();
+            </script>
+        </form>
+
+        <form method="POST" name="model">
+            <select class="model" id="selModel" name="model" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
+                <option value="#">Select Model</option>
+            </select>
+
+            <script>
+                populateModels();
+            </script>
+        </form>
+
+        <form method="POST" name="year">
+            <select class="year" id="selYear" name="year" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
+                <option value="#">Select Year</option>
+            </select> 
+
+            <script>
+                populateYears();
+            </script>
+        </form>
 	</header>
 
-	<p>Test</p>
-	<p>Test2</p>
-	<p>Test3</p>
-	
-	<div class="container">
+    <div class="container">
   				<div class="row">
     				<div class="col-md-12">
     					<div class="modal fade" id="myModal">
     						<div class="modal-dialog modal-lg">
     			
     							<div class="modal-content">
-    								<div class=modal-header">
+    								<div class="modal-header">
+                                        <script>
+                                            document.write("TEST");
+                                        </script>
     									<h1>Title</h1>
     								</div>
-    								<div class=modal-body">
-    									Body
+    								<div class="modal-body">
+    									
     								</div>
-    								<div class=modal-footer">
+    								<div class="modal-footer">
     									<input class="btn btn-default" value="Close">
     								</div>
     							</div>
@@ -42,9 +168,10 @@
     				</div>
   				</div>
 			</div>
-		</div>
-	
+        </div>
+        
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
 </body>
