@@ -8,9 +8,8 @@ class HomeController
 {
     public function home()
     {
-    	include 'home.html';
-        return new Response(
-        );
+    	//include 'home.html';
+        return $this->render('home.html.twig');
     }
 }
 ?>

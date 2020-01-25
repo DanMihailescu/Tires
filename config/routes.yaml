@@ -5,3 +5,11 @@ app_lucky_number:
 app_home_page:
     path: /
     controller: App\Controller\HomeController::home
+
+app_search_results:
+    path: /search
+    controller: App\Controller\SearchController::page
+
+app_tire_guide:
+    path: /tire-guide
+    controller: App\Controller\tireGuideController::page
