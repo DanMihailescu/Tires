@@ -1,13 +1,11 @@
 <script type="text/javascript">
-    var cars = ["Alfa Romeo","Aston Martin","Audi","Bentley","Benz","BMW",
-    "Bugatti","Cadillac","Chevrolet","Chrysler","Citroen","Corvette","DAF",
-    "Dacia","Daewoo","Daihatsu","Datsun","De Lorean","Dino","Dodge","Farboud",
-    "Ferrari","Fiat","Ford","Honda","Hummer","Hyundai","Jaguar","Jeep","KIA",
-    "Koenigsegg","Lada","Lamborghini","Lancia","Land Rover","Lexus","Ligier",
-    "Lincoln","Lotus","Martini","Maserati","Maybach","Mazda","McLaren","Mercedes",
-    "Mercedes-Benz","Mini","Mitsubishi","Nissan","Noble","Opel","Peugeot","Pontiac",
-    "Porsche","Renault","Rolls Royce","Rover","Saab","Seat","Skoda","Smart","Spyker",
-    "Subaru","Suzuki","Toyota","Vauxhall","Volkswagen","Volvo"];
+    var cars = ["Alfa Romeo","Aston Martin","Audi","Bentley","Benz","BMW","Bugatti","Cadillac",
+    "Chevrolet","Chrysler","Citroen","Corvette","DAF","Dacia","Daewoo","Daihatsu","Datsun",
+    "De Lorean","Dino","Dodge","Farboud","Ferrari","Fiat","Ford","Honda","Hummer","Hyundai",
+    "Jaguar","Jeep","KIA","Koenigsegg","Lada","Lamborghini","Lancia","Land Rover","Lexus","Ligier",
+    "Lincoln","Lotus","Martini","Maserati","Maybach","Mazda","McLaren","Mercedes","Mercedes-Benz",
+    "Mini","Mitsubishi","Nissan","Noble","Opel","Peugeot","Pontiac","Porsche","Renault","Rolls Royce",
+    "Rover","Saab","Seat","Skoda","Smart","Spyker","Subaru","Suzuki","Toyota","Vauxhall","Volkswagen","Volvo"];
 
     var chosenBrand;
     var chosenYear;
@@ -62,6 +60,7 @@
         Input:  brand: The currently choosen brand in the drop down
     */
     function populateModels(brand) {
+
         populate(cars,'selModel');
     }
 
@@ -73,7 +72,7 @@
     function removeAllModels(type) {
         var sel = document.getElementById(type);
      }
-1
+
     /*
         POPULATES THE MODEL SELECTION MENU
 
@@ -97,93 +96,107 @@
 
 
 <head>
+    <!-- Gets Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
     <link href="HomeController.css" rel="stylesheet" type="text/css">
-	<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <meta charset="utf-8">
 	<title>TireHaven</title>
-	<h1>HOME PAGE</h1>
+	<a href="home.html">
+        <img class="homeIcon" src="image.JPG">
+    </a>
 </head>
 
+<header>
+    <ul class="menu">
+        <li class="menuItem">
+            <a href="tireSearch.html">Tires</a>
+        </li>
+        <li class="menuItem">
+            <a href="tireGuide.html">Tires Guide</a>
+        </li>
+        <li class="menuItem">
+            <a href="rimSearch.html">Rims</a>
+        </li>
+        <li class="menuItem">
+            <a href="install.html">Installation Finder</a>
+        </li>
+        <li class="cart">
+            <a href="/Users/CrimsonDevil/symfony-auth0-api/templates/checkout/checkoutItems.html.twig">
+                <img class="cart" src="carticon.png">
+            </a>
+        </li>
+    </ul>		
+</header>
+
 <body>
-    <header>
-		<img src='image.JPG' class='background-img'/>
-		<div class="overlay">
-			<h1>TireHaven: The One Stop Tire Shop</h1>
+    <div class="barOne" id="barOne">
+        <h1>TireHaven: The One Stop Tire Shop</h1>
 
-        <!--Button Basic Layout-->
-        <button id="myButton" class="float-left submit-button" >Home</button>
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
-        <!-- CHANGE TO CORRECT LINK -->
-        <script type="text/javascript">
-            document.getElementById("myButton").onclick = function () {
-                location.href = "https://localhost:8000/lucky/number";
-            };
-        </script>   
-            
-        <a href="/lucky/number" target="_self">Profile</a>
-
-        <form method="POST" name="brand">
-            <select class="brand" id="selBrand" name="brand" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
-                <option value="#">Select Brand</option>
-            </select>
-
-            <script>
-                populateBrands();
-            </script>
-        </form>
-
-        <form method="POST" name="model">
-            <select class="model" id="selModel" name="model" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
-                <option value="#">Select Model</option>
-            </select>
-
-            <script>
-                populateModels();
-            </script>
-        </form>
-
-        <form method="POST" name="year">
-            <select class="year" id="selYear" name="year" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
-                <option value="#">Select Year</option>
-            </select> 
-
-            <script>
-                populateYears();
-            </script>
-        </form>
-	</header>
-
-    <div class="container">
-  				<div class="row">
-    				<div class="col-md-12">
-    					<div class="modal fade" id="myModal">
-    						<div class="modal-dialog modal-lg">
-    			
-    							<div class="modal-content">
-    								<div class="modal-header">
-                                        <script>
-                                            document.write("TEST");
-                                        </script>
-    									<h1>Title</h1>
-    								</div>
-    								<div class="modal-body">
-    									
-    								</div>
-    								<div class="modal-footer">
-    									<input class="btn btn-default" value="Close">
-    								</div>
-    							</div>
-    						</div>
-    					</div>
-    					<a href="#" data-toggle="modal" data-target="#myModal">SHOP BY VEHICLE</a>
-    				</div>
-  				</div>
-			</div>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">SHOP BY VEHICLE</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" name="brand">
+                            <select class="brand" id="selBrand" name="brand" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
+                                <option value="#">Select Brand</option>
+                            </select>
+                    
+                            <script>
+                                populateBrands();
+                            </script>
+                        </form>
+                
+                        <form method="POST" name="model">
+                            <select class="model" id="selModel" name="model" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
+                                <option value="#">Select Model</option>
+                            </select>
+                    
+                            <script>
+                                populateModels();
+                            </script>
+                        </form>
+                    
+                        <form method="POST" name="year">
+                            <select class="year" id="selYear" name="year" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
+                                <option value="#">Select Year</option>
+                            </select> 
+                    
+                            <script>
+                                populateYears();
+                            </script>
+                        </form>
+                        <input type="submit" value="Submit">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Submit">
+                    </div>
+                </div>
+            </div>
         </div>
-        
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    </div>
 
+    <!--Button Basic Layout-->
+    <button id="myButton" class="float-left submit-button" >Home</button>
+
+    <!-- CHANGE TO CORRECT LINK -->
+    <script type="text/javascript">
+        document.getElementById("myButton").onclick = function () {
+            location.href = "https://localhost:8000/lucky/number";
+        };
+    </script>   
+            
+    <a href="/lucky/number" target="_self">Profile</a>
 </body>
