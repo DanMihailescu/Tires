@@ -1,34 +1,78 @@
-<!-- Button to open the modal login form -->
-<button onclick="document.getElementById('id01').style.display='block'">Login</button>
-<link href="login.css" rel="stylesheet" type="text/css">
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Bootstrap Login</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{{ asset('assets/css/home.css') }}" rel="stylesheet"/>
+    
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        </head>
+    <body>
+        <div class="container">
+            <div class="card card-container">
+                <img id="profile-img" class="profile-img-card" src="img/carticon.png" />
+                <p id="profile-name" class="profile-name-card"></p>
+                <form class="form-signin" action="" method="POST">
+                    <span id="reauth-email" class="reauth-email"></span>
+                    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="login">Sign in</button>
+                </form>
+            </div>
+        </div>
 
-<!-- The Modal -->
-<div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'"
-class="close" title="Close Modal">&times;</span>
+        <!-- Button to open the modal -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#signup">Sign up</button>
 
-  <!-- Modal Content -->
-  <form class="modal-content animate" action="/action_page.php">
-    <div class="imgcontainer">
-      <img src="img_avatar2.png" alt="Avatar" class="avatar">
-    </div>
+        <!-- The Modal (contains the Sign Up form) -->
+        <div id="signup" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+              <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal"></span>
+              <form class="modal-content" action="create.php" method="POST">
+                <div class="container">
+                  <h1>Sign Up</h1>
+                  <p>Please fill in this form to create an account.</p>
+                  <hr>
+                  <ul>
+                    <li>
+                      <label for="full_name"><b>Name</b></label>
+                      <input type="text" placeholder="Enter Full Name" name="full_name" required>
+                    </li>
 
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="un1ame" required>
+                    <li>
+                      <label for="email"><b>Email</b></label>
+                      <input type="text" placeholder="Enter Email" name="email" required>
+                    </li>
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+                    <li>
+                      <label for="psw"><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" name="psw" required>
+                    </li>
+              
+                    <li> 
+                      <label for="psw-repeat"><b>Repeat Password</b></label>
+                      <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                    </li>
 
-      <button type="submit">Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
+                    <li>                  
+                      <label>
+                        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                      </label>
+                    </li>
+                  </ul>
+                  <input type="checkbox" name="terms" style="margin-bottom:15px"> By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.
 
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
-</div>
+                  <div class="clearfix">
+                    <button type="button" class="close" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="signup">Sign Up</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </body>
+</html>

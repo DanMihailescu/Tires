@@ -15,9 +15,10 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.0.0",
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^3.4.1",
     "express": "^4.17.1",
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1"
   },
   "name": "symfony-auth0-api",
   "version": "1.0.0",

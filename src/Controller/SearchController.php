@@ -6,9 +6,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SearchController
 {
-    public function home()
+    public function page()
     {
-        //include 'home.html';
         return $this->render('search/searchBase.html.twig');
     }
 }

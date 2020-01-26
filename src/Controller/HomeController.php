@@ -2,13 +2,14 @@
 // src/Controller/HomeController.php
 namespace App\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class HomeController
+class homeController extends Controller
 {
     public function home()
     {
-    	//include 'home.html';
         return $this->render('home.html.twig');
     }
 }
