@@ -11,5 +11,13 @@ app_search_results:
     controller: App\Controller\SearchController::page
 
 app_login:
-    path: /ergerg
+    path: /login
     controller: App\Controller\login.php::home
+
+app_add_vehicle:
+    path: /add-vehicle/{b}/{m}/{y}
+    controller: App\Controller\VehicleController.php::createVehicle
+    defaults:
+        b: "NA"
+        m: "NA"
+        y: 0

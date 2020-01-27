@@ -10,7 +10,10 @@ class homeController extends Controller
 {
     public function home()
     {
+        //if usr logged
         return $this->render('home.html.twig');
+        //if usr not logged
+        //something
     }
 }
 ?>
