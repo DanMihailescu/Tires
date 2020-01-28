@@ -19,10 +19,9 @@ class VehicleRepository extends ServiceEntityRepository
         parent::__construct($registry, Vehicle::class);
     }
 
-    // /**
-    //  * @return Vehicle[] Returns an array of Vehicle objects
-    //  */
-    /*
+    /**
+    * @return Vehicle[] Returns an array of Vehicle objects
+    */
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('v')
@@ -34,9 +33,7 @@ class VehicleRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
 
-    /*
     public function findOneBySomeField($value): ?Vehicle
     {
         return $this->createQueryBuilder('v')
@@ -46,5 +43,39 @@ class VehicleRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    /**
+    * @return Vehicle[] Returns an array of Vehicle objects with a certain brand
     */
+    public function findAllWithBrand($brand): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT v
+            FROM App\Entity\Vehicle v
+            WHERE v.brand = :brand'
+        )->setParameter('brand', $brand);
+
+        // returns an array of Vehicle objects
+        return $query->getResult();
+    }
+
+    /**
+    * @return Vehicle[] Returns an array of Vehicle objects with a certain brand and model
+    */
+    public function findAllYears($brand,$model): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT v
+            FROM App\Entity\Vehicle v
+            WHERE v.brand = :brand
+            AND v.model = :model'
+        )->setParameters(array('brand'=>$brand, 'model'=>$model));
+
+        // returns an array of Vehicle objects
+        return $query->getResult();
+    }
 }
