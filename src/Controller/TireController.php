@@ -1,15 +1,5 @@
 <?php
-    //$_GET variables
-    //$_POST variables
-    //using url parameters  ie /search/10/...in controller I get test = 10;
-    // session variables (client side cache)
-    // AUTHENTICATION ROUTES and variable should be obviously included
 
-    // cookies (user side browser cache we have to notify user)
-    //we should have names for routes like POST GET and PUT. 
-    // You can also have DELETE ROUTES and UPDATE Routes and CREATE routes depending on function.
-    //    Essentially  CRUD functionality. A router should be able to be readable like a cheat sheet for the 
-    //  application. F
 namespace App\Controller;
 
 use App\Entity\Vehicle;
@@ -18,29 +8,35 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class vehicleController extends AbstractController {
+class TireController extends AbstractController {
 
     /**
-     * @Route("/vehicle/{brand}/{model}/{year}", name="createVehicle")
+     * @Route("/tire", name="createTire")
      */
-    function createVehicle($brand,$model,$year): Response
+    function createTire($brand,$width,$tireProfile,$rimDiameter,$tractionRating,$temperatureRating,$threadRating,$currentThread,$price): Response
     {
         // you can fetch the EntityManager via $this->getDoctrine()
         // or you can add an argument to the action: createProduct(EntityManagerInterface $entityManager)
         $entityManager = $this->getDoctrine()->getManager();
 
-        $vehicle = new Vehicle();
-        $vehicle = $vehicle->setBrand($brand);
-        $vehicle = $vehicle->setModel($model);
-        $vehicle = $vehicle->setYear($year);
+        $tire = new ShopTire();
+        $tire = $tire->setBrand($brand);
+        $tire = $tire->setWidth($width);
+        $tire = $tire->setTireProfile($tireProfile);
+        $tire = $tire->setRimeDiameter($rimDiameter);
+        $tire = $tire->setTractionRating($tractionRating);
+        $tire = $tire->setTemperatureRating($temperatureRating);
+        $tire = $tire->setThreadRating($threadRating);
+        $tire = $tire->setCurrentThread($currentThread);
+        $tire = $tire->setPrice($price);
 
         // tell Doctrine you want to (eventually) save the vehicle (no queries yet)
-        $entityManager->persist($vehicle);
+        $entityManager->persist($tire);
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
-        return new Response('Saved new vehicle with id '.$vehicle->getId());
+        return new Response('Saved new vehicle with id '.$tire->getId());
     }
 
     /**
@@ -80,4 +76,3 @@ class vehicleController extends AbstractController {
         $years = array_unique($years);
     }
 }
-

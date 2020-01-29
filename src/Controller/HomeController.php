@@ -11,9 +11,6 @@ class homeController extends Controller
 {
     public function home()
     {
-        $veh = new vehicleController();
-        $veh->createVehicle("m","l",134);
-
         //if usr logged
         return $this->render('home.html.twig');
         //if usr not logged
