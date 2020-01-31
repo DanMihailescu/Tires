@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Vehicle;
+use App\Entity\ShopTire;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,8 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class TireController extends AbstractController {
 
-    /**
-     * @Route("/tire", name="createTire")
+    /*
+     * Route("/create-tire", name="createTire")
      */
     function createTire($brand,$width,$tireProfile,$rimDiameter,$tractionRating,$temperatureRating,$threadRating,$currentThread,$price): Response
     {
@@ -39,40 +39,31 @@ class TireController extends AbstractController {
         return new Response('Saved new vehicle with id '.$tire->getId());
     }
 
-    /**
-     * @Route("/find-models/{brand}", name="createVehicle")
+    /** 
+     * @Route("/search", name="searchBySize")
      */
-    function findModels($brand)
+    function searchBySize()
     {
-        $vehicles = $this->getDoctrine()
-        ->getRepository(Vehicle::class)
-        ->findAllWithBrand($brand);
-        $models = array();
-        
-        foreach ($vehicles as $v) {
-            array_push($models, $v->getModel());
-            //echo 'Found the model: '.$v->getYear()." ".$v->getModel().'<br>';
+         // Check if the form is submitted 
+         if ( isset($_POST['width']) ){ 
+            // retrieve the form data by using the element's name attributes value as key 
+            $w = $_POST['width']; 
+            $p = $_POST['depth']; 
+            $r = $_POST['radius'];
+            // display the results echo 
+            echo 'Width: ' . $w . '. Profile: ' . $p . '. Rim Diameter: ' . $r; 
+            $tires = $this->getDoctrine()
+            ->getRepository(ShopTire::class)
+            ->findBySize($w,$p,$r);
+
+            foreach($tires as $t){
+                echo "Tire brand: " . $t->getBrand();
+            }
         }
-
-        $models = array_unique($models);
-    }
-
-    /**
-     * @Route("/find-years/{brand}/{model}", name="findYears")
-     */
-    function findYears($brand,$model)
-    {        
-        $vehicles = $this->getDoctrine()
-        ->getRepository(Vehicle::class)
-        ->findAllYears($brand,$model);
-    
-        $years = array();
-        
-        foreach ($vehicles as $y) {
-            array_push($years, $y->getYear());
-            echo 'Found the year: ' . $y->getYear() . '<br>';
+        else {
+            echo "User didnt enter values";
+            exit;
         }
-
-        $years = array_unique($years);
+        return $this->render('search/seachBase.html.twig');
     }
 }

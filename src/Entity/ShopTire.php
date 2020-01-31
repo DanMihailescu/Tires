@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ShopTiresRepository")
  */
-class ShopTires
+class ShopTire
 {
     /**
      * @ORM\Id()
@@ -22,12 +22,12 @@ class ShopTires
     private $brand;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $width;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="decimal", precision=5, scale=1)
      */
     private $rimDiameter;
 
@@ -37,7 +37,7 @@ class ShopTires
     private $tractionRating;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal", precision=5, scale=1)
      */
     private $tireProfile;
 

@@ -18,21 +18,6 @@ var chosenBrand;
 var chosenYear;
 var chosenModel;
 
-//Ajax calls to get data
-var ajax = new XMLHttpRequest();
-var method = "GET";
-var url = "data.php";
-var asynchronous = true; 
-
-ajax.open(method, url, asynchronous);
-ajax.sent();
-
-//Recieves data from data.php
-ajax.onreadystatechange = function() {
-    if(this.readyState == 4 && this.status == 200) {
-        alert(this.responseText)
-    }
-}
 /*
     POPULATES THE SELECTION MENU
 
@@ -48,7 +33,7 @@ function populate(args, type){
         var opt = document.createElement('option');
         opt.appendChild( document.createTextNode(args[i]) );
         // set value property of opt
-        opt.value = 'option value'; 
+        opt.value =  args[i]; 
         // add opt to end of select box (sel)
         sel.appendChild(opt);
     }
@@ -114,4 +99,12 @@ function populateDepth() {
 */
 function populateRadius() { 
     populate(radius,"selRadius");
+}
+
+function removeAll($element){
+    var select = document.getElementById($element);
+    var length = select.options.length;
+    for (i = 0; i < length; i++) {
+        select.options[i] = null;
+    }
 }

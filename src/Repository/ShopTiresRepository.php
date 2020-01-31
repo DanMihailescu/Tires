@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\ShopTires;
+use App\Entity\ShopTire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -56,7 +56,7 @@ class ShopTiresRepository extends ServiceEntityRepository
             FROM App\Entity\ShopTire t
             WHERE t.width = :width
             AND t.tireProfile = :tireProfile
-            AND t.rimDiameter = :riimDiameter'
+            AND t.rimDiameter = :rimDiameter'
         )->setParameters(array('width'=>$width, 'tireProfile'=>$tireProfile, 'rimDiameter'=>$rimDiameter));
 
         // returns an array of ShopTire objects
@@ -66,135 +66,92 @@ class ShopTiresRepository extends ServiceEntityRepository
     /**
     * @return ShopTire[] Returns an filtered array of tire objects with a certain brand
     */
-    public function filterBrand($width, $tireProfile, $rimDiameter, $brand): array
+    public function filterBrand ($tires, $brand): array
     {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT t
-            FROM App\Entity\ShopTire t
-            WHERE t.width = :width
-            AND t.tireProfile = :tireProfile
-            AND t.rimDiameter = :riimDiameter
-            AND t.brand = :brand'
-        )->setParameters(array('width'=>$width, 'tireProfile'=>$tireProfile, 'rimDiameter'=>$rimDiameter, 
-        'brand'=>$brand));
-
-        // returns an array of ShopTire objects
-        return $query->getResult();
+        $arr = array();
+        foreach($tires as $t) {
+            if ($t->getBrand() == $brand) {
+                array_push($arr, $t->getBrand());
+            }
+        }
+        return $arr;
     }
 
     /**
     * @return ShopTire[] Returns an filtered array of tire objects with a certain traction rating
     */
-    public function filterTraction($width, $tireProfile, $rimDiameter, $tractionRating): array
+    public function filterTraction ($tires, $tractionRating): array
     {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT t
-            FROM App\Entity\ShopTire t
-            WHERE t.width = :width
-            AND t.tireProfile = :tireProfile
-            AND t.rimDiameter = :riimDiameter
-            AND t.tractionRating = :tractionRating'
-        )->setParameters(array('width'=>$width, 'tireProfile'=>$tireProfile, 'rimDiameter'=>$rimDiameter, 
-        'tractionRating'=>$tractionRating));
-
-        // returns an array of ShopTire objects
-        return $query->getResult();
+        $arr = array();
+        foreach($tires as $t) {
+            if ($t->getTractionRating() == $tractionRating) {
+                array_push($arr, $t->getTractionRating());
+            }
+        }
+        return $arr;
     }
 
     /**
-    * @return ShopTire[] Returns an filtered array of tire objects with a certain temperature rating
+    * @return ShopTire[] Returns an filtered array of tire objects with a certain traction rating
     */
-    public function filterTemperature($width, $tireProfile, $rimDiameter, $temperatureRating): array
+    public function filterTemperature ($tires, $temperatureRating): array
     {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT t
-            FROM App\Entity\ShopTire t
-            WHERE t.width = :width
-            AND t.tireProfile = :tireProfile
-            AND t.rimDiameter = :riimDiameter
-            AND t.temperatureRating = :temperatureRating'
-        )->setParameters(array('width'=>$width, 'tireProfile'=>$tireProfile, 'rimDiameter'=>$rimDiameter, 
-        'temperatureRating'=>$temperatureRating));
-
-        // returns an array of ShopTire objects
-        return $query->getResult();
+        $arr = array();
+        foreach($tires as $t) {
+            if ($t->getTemperatureRating() == $temperatureRating) {
+                array_push($arr, $t->getTemperatureRating());
+            }
+        }
+        return $arr;
     }
 
     /**
-    * @return ShopTire[] Returns an filtered array of tire objects with a certain thread rating
+    * @return ShopTire[] Returns an filtered array of tire objects with a certain traction rating
     */
-    public function filterThread($width, $tireProfile, $rimDiameter, $threadRating): array
+    public function filterThread ($tires, $threadRating): array
     {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT t
-            FROM App\Entity\ShopTire t
-            WHERE t.width = :width
-            AND t.tireProfile = :tireProfile
-            AND t.rimDiameter = :riimDiameter
-            AND t.temperatureRating = :temperatureRating'
-        )->setParameters(array('width'=>$width, 'tireProfile'=>$tireProfile, 'rimDiameter'=>$rimDiameter, 
-        'threadRating'=>$threadRating));
-
-        // returns an array of ShopTire objects
-        return $query->getResult();
+        $arr = array();
+        foreach($tires as $t) {
+            if ($t->getThreadRating() == $threadRating) {
+                array_push($arr, $t->getThreadRating());
+            }
+        }
+        return $arr;
     }
 
     /**
-    * @return ShopTire[] Returns an filtered array of tire objects with a certain thread 
+    * @return ShopTire[] Returns an filtered array of tire objects with a certain traction rating
     */
-    public function filterCurrentThread($width, $tireProfile, $rimDiameter, $currentThread): array
+    public function filterCurrentThread ($tires, $currentThread): array
     {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT t
-            FROM App\Entity\ShopTire t
-            WHERE t.width = :width
-            AND t.tireProfile = :tireProfile
-            AND t.rimDiameter = :riimDiameter
-            AND t.currentThread = :currentThread'
-        )->setParameters(array('width'=>$width, 'tireProfile'=>$tireProfile, 'rimDiameter'=>$rimDiameter, 
-        'currentThread'=>$currentThread));
-
-        // returns an array of ShopTire objects
-        return $query->getResult();
+        $arr = array();
+        foreach($tires as $t) {
+            if ($t->getCurrentThread() == $currentThread) {
+                array_push($arr, $t->getCurrentThread());
+            }
+        }
+        return $arr;
     }
 
     /**
-    * @return ShopTire[] Returns an filtered array of tire objects with a certain thread 
+    * @return ShopTire[] Returns an filtered array of tire objects with a certain traction rating
     */
-    public function filterPrice($width, $tireProfile, $rimDiameter, $priceLow, $prieHigh): array
+    public function filterPrice ($tires, $priceLow, $priceHigh): array
     {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT t
-            FROM App\Entity\ShopTire t
-            WHERE t.width = :width
-            AND t.tireProfile = :tireProfile
-            AND t.rimDiameter = :riimDiameter
-            AND t.priceLow >= :priceLow
-            AND t.prieHigh <= :prieHigh'
-        )->setParameters(array('width'=>$width, 'tireProfile'=>$tireProfile, 'rimDiameter'=>$rimDiameter, 
-        'priceLow'=>$priceLow, 'prieHigh'=>$prieHigh));
-
-        // returns an array of ShopTire objects
-        return $query->getResult();
+        $arr = array();
+        foreach($tires as $t) {
+            if ($priceLow <= $t->getPrice() && $t->getPrice() <= $priceHigh) {
+                array_push($arr, $t->getCurrentThread());
+            }
+        }
+        return $arr;
     }
 
     /**
     * @return ShopTire[] Returns an array of tire objects with a certain brand
     */
     public function filterAll($width, $tireProfile, $rimDiameter, $brand, $tractionRating, 
-    $temperatureRating, $threadRating, $currentThread, $price): array
+    $temperatureRating, $threadRating, $currentThread, $priceLow, $priceHigh): array
     {
         $entityManager = $this->getEntityManager();
 

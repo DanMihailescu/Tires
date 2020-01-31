@@ -8,7 +8,7 @@ app_home_page:
 
 app_search_results:
     path: /search
-    controller: App\Controller\SearchController::page
+    controller: App\Controller\TireController::page
 
 app_login:
     path: /login

@@ -108,39 +108,41 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" name="width">
-                        <select class="width" id="selWidth" name="width" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
+                    <form name="sizes" action="/search" method="POST">
+                        <select class="width" id="selWidth" name="width" onchange="clearMMYCErrors();disableSavedRecent();">
                             <option value="#">Select Width</option>
                         </select>
-                
+
                         <script>
                             populateWidth();
                         </script>
-                    </form>
-            
-                    <form method="POST" name="depth">
-                        <select class="depth" id="selDepth" name="depth" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
+
+                        <br/><br/>
+
+                        <select class="depth" id="selDepth" name="depth" onchange="clearMMYCErrors();disableSavedRecent();">
                             <option value="#">Select Depth</option>
                         </select>
 
                         <script>
                             populateDepth();
                         </script>
-                    </form>
-                
-                    <form method="POST" name="radius">
-                        <select class="radius" id="selRadius" name="radius" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
+
+                        <br/><br/>
+
+                        <select class="radius" id="selRadius" name="radius" onchange="clearMMYCErrors(); disableSavedRecent();">
                             <option value="#">Select Radius</option>
                         </select> 
                 
                         <script>
                             populateRadius();
                         </script>
+
+                        <br/><br/>
+
+                        <input type="submit" value="Submit">
                     </form>
-                    <input type="submit" value="Submit">
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" value="Submit">
                 </div>
             </div>
         </div>
