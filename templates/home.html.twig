@@ -62,7 +62,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" name="brand">
+                    <form name="vehicle_search" action="/search_vehicle" method="POST">
                         <select class="brand" id="selBrand" name="brand" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
                             <option value="#">Select Brand</option>
                         </select>
@@ -70,9 +70,9 @@
                         <script>
                             populateBrands();
                         </script>
-                    </form>
-            
-                    <form method="POST" name="model">
+
+                        <br/><br/>
+
                         <select class="model" id="selModel" name="model" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
                             <option value="#">Select Model</option>
                         </select>
@@ -80,9 +80,9 @@
                         <script>
                             populateModels();
                         </script>
-                    </form>
-                
-                    <form method="POST" name="year">
+
+                        <br/><br/>
+
                         <select class="year" id="selYear" name="year" onchange="clearMMYCErrors();deleteAutoYears();deleteAutoModels();populateAutoYears(); disableSavedRecent();">
                             <option value="#">Select Year</option>
                         </select> 
@@ -90,11 +90,11 @@
                         <script>
                             populateYears();
                         </script>
+
+                        <br/><br/>
+                        
+                        <input type="submit" value="Submit">
                     </form>
-                    <input type="submit" value="Submit">
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" value="Submit">
                 </div>
             </div>
         </div>

@@ -6,10 +6,8 @@ use App\Entity\ShopTire;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Twig_Extension;
-use Twig_Loader_Filesystem;
-use Twig_Environment;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 require_once '../vendor/autoload.php';
@@ -61,12 +59,24 @@ class TireController extends Controller {
             ->getRepository(ShopTire::class)
             ->findBySize($w,$p,$r);
             
-            return $this->render('search/seachBase.html.twig', array('tires' => $tires));
+            $data = [];
+            foreach($tires as $t) {
+                $brand = $t->getBrand();
+                $temperatureRating = $t->getTemperatureRating();
+                $threadRating = $t->getThreadRating();
+                $price = $t->getPrice();
+                array_push($data, ['brand' => $brand, 'width'=>$w,'profile'=>$p,'rimDiamete'=>$r,
+                'temperatureRating'=>$temperatureRating, 'threadRating'=>$threadRating, 'price'=>$price]);
+            }
+            return new JsonResponse($data);
+ 
+            //return $this->render('search/seachBase.html.twig', array('tires' => $tires));
         }
         else {
             echo "User didnt enter values";
             exit;
         }
+
         return $this->render('home.html.twig');
     }
 
@@ -76,7 +86,7 @@ class TireController extends Controller {
     function searchByVehicle()
     {
          // Check if the form is submitted  
-         if ( isset($_POST['width']) ){ 
+         if ( isset($_POST['width']) && isset($_POST['depth']) && isset($_POST['radius'])){ 
             // retrieve the form data by using the element's name attributes value as key 
             $w = $_POST['width']; 
             $p = $_POST['depth']; 

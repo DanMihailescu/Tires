@@ -43,9 +43,7 @@ class vehicleController extends AbstractController {
         return new Response('Saved new vehicle with id '.$vehicle->getId());
     }
 
-    /**
-     * @Route("/find-models/{brand}", name="createVehicle")
-     */
+    //Finds models
     function findModels($brand)
     {
         $vehicles = $this->getDoctrine()
@@ -55,7 +53,6 @@ class vehicleController extends AbstractController {
         
         foreach ($vehicles as $v) {
             array_push($models, $v->getModel());
-            //echo 'Found the model: '.$v->getYear()." ".$v->getModel().'<br>';
         }
 
         $models = array_unique($models);
