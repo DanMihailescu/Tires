@@ -5,10 +5,16 @@ namespace App\Controller;
 use App\Entity\ShopTire;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Twig_Extension;
+use Twig_Loader_Filesystem;
+use Twig_Environment;
 
-class TireController extends AbstractController {
+
+require_once '../vendor/autoload.php';
+
+class TireController extends Controller {
 
     /*
      * Route("/create-tire", name="createTire")
@@ -44,26 +50,29 @@ class TireController extends AbstractController {
      */
     function searchBySize()
     {
-         // Check if the form is submitted 
+        //$this->render('search/seachBase.html.twig');
+         // Check if the form is submitted  
          if ( isset($_POST['width']) ){ 
             // retrieve the form data by using the element's name attributes value as key 
             $w = $_POST['width']; 
             $p = $_POST['depth']; 
             $r = $_POST['radius'];
-            // display the results echo 
-            echo 'Width: ' . $w . '. Profile: ' . $p . '. Rim Diameter: ' . $r; 
+
             $tires = $this->getDoctrine()
             ->getRepository(ShopTire::class)
             ->findBySize($w,$p,$r);
 
-            foreach($tires as $t){
-                echo "Tire brand: " . $t->getBrand();
-            }
+            echo $tires[0]->getBrand();
+
+            $loader = new Twig_Loader_Filesystem('../templates');
+            $twig = new Twig_Environment($loader);
+            
+            return $this->render('search/seachBase.html.twig', array('tires' => $tires));
         }
         else {
             echo "User didnt enter values";
             exit;
         }
-        return $this->render('search/seachBase.html.twig');
+        return $this->render('home.html.twig');
     }
 }
