@@ -50,7 +50,31 @@ class TireController extends Controller {
      */
     function searchBySize()
     {
-        //$this->render('search/seachBase.html.twig');
+         // Check if the form is submitted  
+         if ( isset($_POST['width']) && isset($_POST['depth']) && isset($_POST['radius'])){ 
+            // retrieve the form data by using the element's name attributes value as key 
+            $w = $_POST['width']; 
+            $p = $_POST['depth']; 
+            $r = $_POST['radius'];
+
+            $tires = $this->getDoctrine()
+            ->getRepository(ShopTire::class)
+            ->findBySize($w,$p,$r);
+            
+            return $this->render('search/seachBase.html.twig', array('tires' => $tires));
+        }
+        else {
+            echo "User didnt enter values";
+            exit;
+        }
+        return $this->render('home.html.twig');
+    }
+
+    /** 
+     * @Route("/search_vehicle", name="searchByVehicle")
+     */
+    function searchByVehicle()
+    {
          // Check if the form is submitted  
          if ( isset($_POST['width']) ){ 
             // retrieve the form data by using the element's name attributes value as key 
@@ -61,11 +85,6 @@ class TireController extends Controller {
             $tires = $this->getDoctrine()
             ->getRepository(ShopTire::class)
             ->findBySize($w,$p,$r);
-
-            echo $tires[0]->getBrand();
-
-            $loader = new Twig_Loader_Filesystem('../templates');
-            $twig = new Twig_Environment($loader);
             
             return $this->render('search/seachBase.html.twig', array('tires' => $tires));
         }
